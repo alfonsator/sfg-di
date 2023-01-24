@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
 import com.f5mj.sfgdi.controllers.ConstructorInjectedController;
+import com.f5mj.sfgdi.controllers.I18nController;
 import com.f5mj.sfgdi.controllers.MyController;
 import com.f5mj.sfgdi.controllers.PropertyInjectedController;
 import com.f5mj.sfgdi.controllers.SetterInjectedController;
@@ -15,6 +16,9 @@ public class SfgDiApplication {
 	public static void main(String[] args) {
 
 		ApplicationContext ctx = SpringApplication.run(SfgDiApplication.class, args);
+
+		I18nController i18nController = (I18nController) ctx.getBean("i18nController");
+		System.out.println(i18nController.sayHello());
 
 		MyController myController = (MyController) ctx.getBean("myController");
 
