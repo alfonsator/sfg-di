@@ -10,6 +10,9 @@ import com.f5mj.sfgdi.controllers.MyController;
 import com.f5mj.sfgdi.controllers.PropertyInjectedController;
 import com.f5mj.sfgdi.controllers.SetterInjectedController;
 
+// To override default component scan (in case we add packages outside main tree defined
+// by main class), add this annotation:
+// @ComponentScan(basePackages = {"com.f5mj.sfgdi", "<PACKAGE_NAME>", ...})
 @SpringBootApplication
 public class SfgDiApplication {
 
@@ -26,15 +29,18 @@ public class SfgDiApplication {
 		System.out.println(myController.sayHello());
 
 		System.out.println("----------- Property");
-		PropertyInjectedController propertyInjectedController = (PropertyInjectedController) ctx.getBean("propertyInjectedController");
+		PropertyInjectedController propertyInjectedController = (PropertyInjectedController) ctx
+				.getBean("propertyInjectedController");
 		System.out.println(propertyInjectedController.getGreeting());
 
 		System.out.println("----------- Setter");
-		SetterInjectedController setterInjectedController = (SetterInjectedController) ctx.getBean("setterInjectedController");
+		SetterInjectedController setterInjectedController = (SetterInjectedController) ctx
+				.getBean("setterInjectedController");
 		System.out.println(setterInjectedController.getGreeting());
 
 		System.out.println("----------- Constructor");
-		ConstructorInjectedController constructorInjectedController = (ConstructorInjectedController) ctx.getBean("constructorInjectedController");
+		ConstructorInjectedController constructorInjectedController = (ConstructorInjectedController) ctx
+				.getBean("constructorInjectedController");
 		System.out.println(constructorInjectedController.getGreeting());
 	}
 
