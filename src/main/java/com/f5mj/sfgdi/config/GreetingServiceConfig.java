@@ -1,10 +1,13 @@
 package com.f5mj.sfgdi.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
+import org.springframework.context.annotation.PropertySource;
 
+import com.f5mj.sfgdi.datasource.FakeDataSource;
 import com.f5mj.sfgdi.repositories.EnglishGreetingRepository;
 import com.f5mj.sfgdi.repositories.EnglishGreetingRepositoryImpl;
 import com.f5mj.sfgdi.services.ConstructorGreetingService;
@@ -14,8 +17,24 @@ import com.f5mj.sfgdi.services.PrimaryGreetingService;
 import com.f5mj.sfgdi.services.PropertyInjectedGreetingService;
 import com.f5mj.sfgdi.services.SetterInjectedGreetingService;
 
+@PropertySource("classpath:datasource.properties")
+// @ImportResource("classpath:<CONFIG_FILE>.xml") --> Si usáramos configuración
+// basada en XML
 @Configuration
 public class GreetingServiceConfig {
+
+   @Bean
+   FakeDataSource fakeDataSource(@Value("${f5mj.username}") String username, @Value("${f5mj.password}") String password,
+         @Value("${f5mj.jdbcurl}") String jdbcurl) {
+
+      FakeDataSource fakeDataSource = new FakeDataSource();
+
+      fakeDataSource.setUsername(username);
+      fakeDataSource.setPassword(password);
+      fakeDataSource.setJdbcurl(jdbcurl);
+
+      return fakeDataSource;
+   }
 
    @Profile({ "ES", "default" })
    @Bean("i18nService")
