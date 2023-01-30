@@ -5,7 +5,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
-import org.springframework.context.annotation.PropertySource;
 
 import com.f5mj.sfgdi.datasource.FakeDataSource;
 import com.f5mj.sfgdi.repositories.EnglishGreetingRepository;
@@ -17,7 +16,7 @@ import com.f5mj.sfgdi.services.PrimaryGreetingService;
 import com.f5mj.sfgdi.services.PropertyInjectedGreetingService;
 import com.f5mj.sfgdi.services.SetterInjectedGreetingService;
 
-@PropertySource("classpath:datasource.properties")
+//@PropertySource("classpath:datasource.properties")
 // @ImportResource("classpath:<CONFIG_FILE>.xml") --> Si usáramos configuración
 // basada en XML
 @Configuration

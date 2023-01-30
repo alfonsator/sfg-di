@@ -13,6 +13,8 @@ public class I18nEnglishGreetingService implements GreetingService {
 
    public I18nEnglishGreetingService(EnglishGreetingRepository englishGreetingRepository) {
       this.englishGreetingRepository = englishGreetingRepository;
+
+      System.out.println(this.englishGreetingRepository);
    }
 
    @Override
