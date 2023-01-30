@@ -1,6 +1,6 @@
 package com.f5mj.sfgdi.config;
 
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -19,18 +19,18 @@ import com.f5mj.sfgdi.services.SetterInjectedGreetingService;
 //@PropertySource("classpath:datasource.properties")
 // @ImportResource("classpath:<CONFIG_FILE>.xml") --> Si usáramos configuración
 // basada en XML
+@EnableConfigurationProperties(SfgConstructorConfig.class)
 @Configuration
 public class GreetingServiceConfig {
 
    @Bean
-   FakeDataSource fakeDataSource(@Value("${f5mj.username}") String username, @Value("${f5mj.password}") String password,
-         @Value("${f5mj.jdbcurl}") String jdbcurl) {
+   FakeDataSource fakeDataSource(SfgConstructorConfig sfgConstructorConfig) {
 
       FakeDataSource fakeDataSource = new FakeDataSource();
 
-      fakeDataSource.setUsername(username);
-      fakeDataSource.setPassword(password);
-      fakeDataSource.setJdbcurl(jdbcurl);
+      fakeDataSource.setUsername(sfgConstructorConfig.getUsername());
+      fakeDataSource.setPassword(sfgConstructorConfig.getPassword());
+      fakeDataSource.setJdbcurl(sfgConstructorConfig.getJdbcurl());
 
       return fakeDataSource;
    }
